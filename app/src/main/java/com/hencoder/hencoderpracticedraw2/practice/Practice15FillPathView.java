@@ -15,6 +15,7 @@ public class Practice15FillPathView extends View {
     Path path1 = new Path();
     Path path2 = new Path();
     Path path3 = new Path();
+    Path path4 = new Path();
 
     public Practice15FillPathView(Context context) {
         super(context);
@@ -50,6 +51,8 @@ public class Practice15FillPathView extends View {
         // 第一处：获取 Path
         canvas.drawPath(path, paint);
 
+        paint.getFillPath(path, path1); //获取实际的path
+
         canvas.save();
         canvas.translate(500, 0);
         canvas.drawPath(path1, pathPaint);
@@ -61,6 +64,8 @@ public class Practice15FillPathView extends View {
         // 第二处：设置 Style 为 STROKE 后再获取 Path
         canvas.drawPath(path, paint);
         canvas.restore();
+
+        paint.getFillPath(path, path2);
 
         canvas.save();
         canvas.translate(500, 200);
@@ -74,9 +79,33 @@ public class Practice15FillPathView extends View {
         canvas.drawPath(path, paint);
         canvas.restore();
 
+        paint.getFillPath(path ,path3);
+
         canvas.save();
         canvas.translate(500, 400);
         canvas.drawPath(path3, pathPaint);
         canvas.restore();
+
+
+        //绘制文字
+        paint.reset();
+        paint.setTextSize(200);
+        paint.setStrokeWidth(80);
+
+        canvas.save();
+        canvas.translate(100,900);
+        canvas.drawText("WYK",0,0, paint);
+        canvas.restore();
+
+        paint.getTextPath("WYK", 0,"WYK".length(),0,0 , path4);
+
+        //paint.reset();
+        //paint.setStyle(Paint.Style.STROKE);
+        canvas.save();
+        canvas.translate(600,900);
+        //canvas.drawPath(path4, paint);
+        canvas.drawPath(path4, pathPaint);
+        canvas.restore();
+
     }
 }
